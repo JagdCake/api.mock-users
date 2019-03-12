@@ -25,7 +25,7 @@ class UsersController extends AbstractController
             );
         }
 
-        return new JsonResponse(['mock_users' => $users]);
+        return new JsonResponse($users);
     }
 
     /**
