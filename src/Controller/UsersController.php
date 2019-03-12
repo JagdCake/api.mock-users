@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Users;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class UsersController extends AbstractController
@@ -25,5 +27,25 @@ class UsersController extends AbstractController
 
         return new JsonResponse(['mock_users' => $users]);
     }
+
+    /**
+     * @Route("/mock_users", name="addUser", methods={"POST"})
+     */
+    public function addUser(Request $request) {
+        $data = $request->request->all();
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $user = new Users();
+        $user->setFirstName($data['first_name']);
+        $user->setLastName($data['last_name']);
+        $user->setAge($data['age']);
+        $user->setSex($data['sex']);
+
+        $entityManager->persist($user);
+
+        $entityManager->flush();
+
+        return new Response('Saved new user with id '.$user->getId()."\n");
     }
 }
