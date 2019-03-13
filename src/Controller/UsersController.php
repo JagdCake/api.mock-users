@@ -32,7 +32,7 @@ class UsersController extends AbstractController
      * @Route("/mock_users", name="addUser", methods={"POST"})
      */
     public function addUser(Request $request) {
-        $data = $request->request->all();
+        $data = json_decode($request->getContent(), true);
 
         $entityManager = $this->getDoctrine()->getManager();
 
