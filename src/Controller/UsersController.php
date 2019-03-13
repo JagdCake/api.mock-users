@@ -46,6 +46,13 @@ class UsersController extends AbstractController
 
         $entityManager->flush();
 
-        return new Response('Saved new user with id '.$user->getId()."\n");
+        $message = 'Saved new user with id '.$user->getId()."\n";
+
+        $response = new JsonResponse(
+            ['message' => $message],
+            Response::HTTP_CREATED
+        );
+
+        return $response;
     }
 }
