@@ -55,4 +55,31 @@ class UsersController extends AbstractController
 
         return $response;
     }
+
+    /**
+     * @Route("/mock_users/{id}", name="deleteUser", methods={"DELETE"})
+     */
+    public function deleteUser($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Users::class)->find($id);
+
+        if (!$user) {
+            $statusCode = Response::HTTP_NOT_FOUND;
+            throw $this->createNotFoundException('No user found with ID: '.$id);
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $message = "Deleted a user\n";
+        $statusCode = Response::HTTP_OK;
+
+        $response = new JsonResponse(
+            ['message' => $message],
+            $statusCode
+        );
+
+        return $response;
+    }
+
 }
