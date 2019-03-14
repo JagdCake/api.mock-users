@@ -20,12 +20,17 @@ class UsersController extends AbstractController
         $users = $query->getArrayResult();
 
         if (!$users) {
+            $statusCode = Response::HTTP_NOT_FOUND;
             throw $this->createNotFoundException(
                 'No users have been found'
             );
         }
 
-        return new JsonResponse($users);
+        $statusCode = Response::HTTP_OK;
+
+        $response = new JsonResponse($users, $statusCode);
+
+        return $response;
     }
 
     /**
