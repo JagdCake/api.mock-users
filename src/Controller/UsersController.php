@@ -37,8 +37,9 @@ class UsersController extends AbstractController
      * @Route("/mock_users/{id}", name="showUser", methods={"GET"})
      */
     public function showUser($id) {
-        $entityManager = $this->getDoctrine()->getManager();
-        $user = $entityManager->getRepository(Users::class)->findOneBy($id);
+        $query = $this->getDoctrine()->getManager()
+            ->createQuery('select u.first_name, u.last_name, u.age, u.sex from App\Entity\Users u where u.id = '.$id);
+        $user = $query->getSingleResult();
 
         if (!$user) {
             $statusCode = Response::HTTP_NOT_FOUND;
