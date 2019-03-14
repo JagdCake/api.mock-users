@@ -87,6 +87,38 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @Route("/mock_users/{id}", name="editUser", methods={"PUT"})
+     */
+    public function editUser($id, Request $request) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Users::class)->find($id);
+
+        if (!$user) {
+            $statusCode = Response::HTTP_NOT_FOUND;
+            throw $this->createNotFoundException('No user found with ID: '.$id);
+        }
+
+        $data = json_decode($request->getContent(), true);
+
+        $user->setFirstName($data['first_name']);
+        $user->setLastName($data['last_name']);
+        $user->setAge($data['age']);
+        $user->setSex($data['sex']);
+
+        $entityManager->flush();
+
+        $message = 'Updated data for user: '.$user->getFirstName().' '.$user->getLastName()."\n";
+        $statusCode = Response::HTTP_OK;
+
+        $response = new JsonResponse(
+            ['message' => $message],
+            $statusCode
+        );
+
+        return $response;
+    }
+
+    /**
      * @Route("/mock_users/{id}", name="deleteUser", methods={"DELETE"})
      */
     public function deleteUser($id) {
