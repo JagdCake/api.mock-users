@@ -34,6 +34,26 @@ class UsersController extends AbstractController
     }
 
     /**
+     * @Route("/mock_users/{id}", name="showUser", methods={"GET"})
+     */
+    public function showUser($id) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user = $entityManager->getRepository(Users::class)->findOneBy($id);
+
+        if (!$user) {
+            $statusCode = Response::HTTP_NOT_FOUND;
+            throw $this->createNotFoundException('No user found with ID: '.$id);
+        }
+
+        $statusCode = Response::HTTP_OK;
+
+        $response = new JsonResponse($user, $statusCode);
+
+        return $response;
+    }
+
+
+    /**
      * @Route("/mock_users", name="addUser", methods={"POST"})
      */
     public function addUser(Request $request) {
