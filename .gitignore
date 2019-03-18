@@ -12,4 +12,3 @@
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 TODO
-bin/
