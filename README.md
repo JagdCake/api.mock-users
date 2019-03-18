@@ -5,6 +5,7 @@ The main things here:
 
 ## First Time Setup
 #### Symfony 4
+- make sure you have PHP (7.1.3+) installed
 - download [composer](https://getcomposer.org/download/) and [install](https://getcomposer.org/doc/00-intro.md#globally) it globally
 - run `composer install` 
 - start the development server with `bin/console server:run` or `php bin/console server:run`
