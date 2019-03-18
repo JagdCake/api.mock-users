@@ -16,4 +16,4 @@ The main things here:
 - make sure the migration won't do something you don't want (like drop every table from your database) by reviewing it, inside `src/Migrations/`
 - execute the migration `bin/console doctrine:migrations:migrate`
 - connect to your database and create an API user `insert into api_user (id, username, roles, api_token) values (1, 'username', '["ROLE_ADMIN"]'::json, 'apiKey');`
-- test the db connection with `curl -H 'X-AUTH-TOKEN: apiKey' http://localhost:8000/mock_users`, if you have any users in the database you should receive their data as JSON, or `{"message":"Username could not be found."}` otherwise 
+- to test the db connection, first disable debug mode by creating (in .env or .env.local) or exporting `APP_DEBUG=0`, then run `curl -H 'X-AUTH-TOKEN: apiKey' http://localhost:8000/mock_users`, if you have any users in the database you should receive their data as JSON; if you enter a wrong API key you should get `{"message":"Username could not be found."}`
