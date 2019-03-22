@@ -10,4 +10,4 @@
 
 All environment variables in [docker-compose.yml](./docker-compose.yml) and [nginx/default.conf](./nginx/default.conf) have to be set. `APP_ENV`, `APP_DEBUG` and `APP_SECRET` from both files should match.
 
-On line 10 of the [nginx/Dockerfile](./nginx/Dockerfile) - `RUN echo "upstream php-upstream { server api:8000; }" > /etc/nginx/conf.d/upstream.conf`, `api` corresponds to the name of the project service.
+On line 10 of the [nginx/Dockerfile](./nginx/Dockerfile#L10) — `RUN echo "upstream php-upstream { server api:8000; }" > /etc/nginx/conf.d/upstream.conf`, `api` corresponds to the name of the project service.
