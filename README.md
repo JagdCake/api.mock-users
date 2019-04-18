@@ -10,8 +10,9 @@ The main things here:
 - run `composer install` 
 - start the development server with `bin/console server:run` or `php bin/console server:run`
 
-#### Database:
-- create (in .env or .env.local) or export a variable `DATABASE_URL="db_driver://db_user:db_password@db_host:db_port/db_name"`, e.g. `postgres://jagdcake:password_for_stuff@127.0.0.1:5432/stuff`
+#### Database
+- make sure you have PostgreSQL (version 10) installed and running
+- create (in [.env](./.env) or .env.local) or export a variable `DATABASE_URL="db_driver://db_user:db_password@db_host:db_port/db_name"`, e.g. `postgres://jagdcake:password_for_stuff@127.0.0.1:5432/stuff`
 - delete all migration files inside `src/Migrations/`
 - run a migration with `bin/console make:migration`
 - make sure the migration won't do something you don't want (like drop every table from your database) by reviewing it, inside `src/Migrations/`
