@@ -1,4 +1,6 @@
 # api.mock-users
+## Archived for now because I have no use for it.
+
 The main things here: 
 - the entity classes (database models) in `src/Entity/`, one for API users and the other for mock user data
 - the controller class in `src/Controller` handles requests, sends responses
